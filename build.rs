@@ -405,6 +405,10 @@ const MODULE_RAW_LINES: &'static [(&'static str, &'static str)] = &[
 /// Rerun this build script if files under mozjs/ changed, unless this returns true.
 /// Keep this in sync with .gitignore
 fn ignore(path: &Path) -> bool {
+    if path.is_dir() {
+        return true;
+    }
+
     let ignored_extensions = ["pyc", "so", "dll", "dylib"];
     let ignored_trailing_paths = [["psutil", "build"], ["psutil", "tmp"]];
 
